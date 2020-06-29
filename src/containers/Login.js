@@ -19,8 +19,9 @@ class Login extends Component {
             password: password
         }).then(response => {
                 let data = response.data;
+                let isAdmin = data.role === 'Admin'?true:false                
                 localStorage.setItem('auth-data', data.token);
-                this.props.history.push('/dashboard', {token:data.token});
+                this.props.history.push('/dashboard', {token:data.token, isAdmin:isAdmin});
             }).catch(error=> {
                  alert(error)
             });

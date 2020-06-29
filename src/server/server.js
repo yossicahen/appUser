@@ -17,13 +17,14 @@ app.get('/', function (req, res) {
     let page = parseInt(req.query.page)
     let limit = parseInt(req.query.limit)
     let params = JSON.parse(req.query.params);
+    console.log(page,limit,params);
+    
     MongoClient.connect(url, function (err, db) {
         if (err) 
              throw err;
         const dbo = db.db("admin");
         
-        dbo.collection("users").find({[params.searchBy]:new RegExp(params.name, 'i')}).skip(page)
-        .limit(limit).toArray(function (err, result) {
+        dbo.collection("users").find({[params.searchBy]:new RegExp(params.name, 'i')}).skip(page).limit(limit).sort( {[params.searchBy] : params.order }).toArray(function (err, result) {
             if (err) 
               throw err;
             res.send(result)
@@ -62,7 +63,8 @@ app.post('/login', function (req, res) {
                         { expiresIn: '24h' });
                     res.send({
                         userId: result._id,
-                        token: token
+                        token: token,
+                        role: result.role
                      });          
             } else
                 res.send(401, 'unauthorization');   

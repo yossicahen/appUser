@@ -9,7 +9,7 @@ import NavBar from '../containers/NavBar';
 const Dashboard = (props) => {
     const  [queryParamsPage,setqueryParamsPage] = useState(20)
     const [queryParamsLimit] = useState(20)
-    const [queryParamsName,setqueryParamsName] = useState({})
+    const [queryParamsName,setqueryParamsName] = useState({name:{},searchBy:'name',order:1})
     let history = useHistory()
     const getContext = useContext(Context);
     const data = getContext.state.appData;
@@ -47,13 +47,13 @@ const Dashboard = (props) => {
     return (
        authorization?
         <div>
-            <NavBar searchUser={searchUser}/>
+            <NavBar searchUser={searchUser} setqueryParamsName={setqueryParamsName} isAdmin={props.location.state.isAdmin}/>
             <div style={{maxHeight: '75vh',overflow: 'auto'}} onScroll={(e)=>handleScroll(e)}>
               <table className='table table-hover table-bordered'>
                  <thead>
                     <tr className=''>
-                        <th scope="col" className=''>USER NAME <img className="ml-2" style={{transform: 'rotate(90deg)',cursor:"pointer"}} alt="" src='assets/arrow.png'/></th>
-                        <th scope="col" className=''>NAME <img className="ml-2" style={{cursor:"pointer"}} alt="" src='assets/arrow.png'/></th>
+                        <th scope="col" className=''>USER NAME</th>
+                        <th scope="col" className=''>NAME </th>
                         <th scope="col" className=''>LAST NAME</th>
                         <th scope="col" className=''>ROLE</th>
                     </tr>

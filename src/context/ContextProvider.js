@@ -18,7 +18,8 @@ class ContextProvider extends Component {
         let limit = 20;
         let params = {
             name:{},
-            searchBy:'name'
+            searchBy:'name',
+            order:1
         }
         this.fetchData(page,limit,params) 
     }
@@ -31,6 +32,8 @@ class ContextProvider extends Component {
                 params:params
                 }})
              .then(response => {
+                 console.log(response.data);
+                 
                 let joined = this.state.appData.concat(response.data);
                 this.setState({appData:joined});
             })
