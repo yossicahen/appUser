@@ -1,0 +1,13 @@
+/**** CSS-CONTAINERS ****/
+
+.wrapper{
+    background-color: #1A253A;
+   min-height: 100vh;
+    color: white;
+    font-size: 12px;
+}
+
+.loginForm{
+    margin-top: 200px;
+    width: 35%;
+}
